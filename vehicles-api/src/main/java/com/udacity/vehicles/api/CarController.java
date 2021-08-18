@@ -89,11 +89,9 @@ class CarController {
      */
     @PutMapping("/{id}")
     ResponseEntity<?> put(@PathVariable Long id, @Valid @RequestBody Car car) {
-        /**
-         *   Update the first line as part of the above implementing.
-         */
         car.setId(id);
-        Resource<Car> resource = assembler.toResource(carService.save(car));
+        Car newCar = carService.save(car);
+        Resource<Car> resource = assembler.toResource(newCar);
         return ResponseEntity.ok(resource);
     }
 
@@ -106,6 +104,5 @@ class CarController {
     ResponseEntity<?> delete(@PathVariable Long id) {
         carService.delete(id);
         return ResponseEntity.noContent().build();
-        //test
     }
 }
